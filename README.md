@@ -55,6 +55,17 @@ EASYPOST_API_KEY=EZTK...
 
 The label API lists the authenticated user's labels, shows label details, creates a new USPS test label by buying the cheapest USPS rate, and redirects to the stored PDF label URL for printing.
 
+## Frontend status
+
+The React/Vite app shell is configured and served by Laravel as a single-page app. It currently includes placeholder routes for login, registration, label history, label creation, and label detail pages.
+
+Run the frontend dev server and Laravel server in separate terminals:
+
+```bash
+npm run dev
+php artisan serve
+```
+
 ## Database structure
 
 The current schema is focused on user-owned shipping labels:
