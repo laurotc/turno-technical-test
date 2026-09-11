@@ -53,7 +53,7 @@ Shipping-label creation uses EasyPost from the Laravel backend only. Add a test 
 EASYPOST_API_KEY=EZTK...
 ```
 
-The label API lists the authenticated user's labels, creates a new USPS test label by buying the cheapest USPS rate, and redirects to the stored PDF label URL for printing.
+The label API lists the authenticated user's labels, shows label details, creates a new USPS test label by buying the cheapest USPS rate, and redirects to the stored PDF label URL for printing.
 
 ## Database structure
 
@@ -76,7 +76,7 @@ php artisan test --testsuite=Feature
 
 Current coverage includes register, login, invalid credentials, authenticated profile lookup, missing-token rejection, and logout token deletion.
 
-Shipping-label tests cover authenticated pagination, user scoping, request validation, successful label storage with a fake EasyPost client, EasyPost error handling, and print redirects.
+Shipping-label tests cover authenticated pagination, label details, user scoping, request validation, successful label storage with a fake EasyPost client, EasyPost error handling, and print redirects.
 
 ## Assumptions
 
@@ -90,7 +90,7 @@ Shipping-label tests cover authenticated pagination, user scoping, request valid
 
 ## What I'd do next
 
-- Add frontend React screens for login, label creation, label history, and printable label details.
+- Add frontend React screens for login, label creation, label history, and label details.
 - Add optional rate selection if users need to compare service levels before buying.
 - Add address verification, refunds/voiding, tracking webhooks, and better production observability.
 

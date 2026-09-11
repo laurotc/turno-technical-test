@@ -108,6 +108,56 @@ class ShippingLabelApiTest extends TestCase
             ->assertJsonPath('error', 'No USPS rates were returned for this shipment.');
     }
 
+    public function test_user_can_view_their_label_details(): void
+    {
+        $user = User::factory()->create();
+        $label = ShippingLabel::factory()->for($user)->create([
+            'tracking_code' => '9400100000000000000000',
+        ]);
+
+        $response = $this
+            ->withToken($user->createToken('api')->plainTextToken)
+            ->getJson("/api/labels/{$label->id}");
+
+        $response
+            ->assertOk()
+            ->assertJsonPath('data.id', $label->id)
+            ->assertJsonPath('data.tracking_code', '9400100000000000000000')
+            ->assertJsonPath('data.to_address.country', 'US')
+            ->assertJsonPath('data.parcel.weight', 16)
+            ->assertJsonStructure([
+                'data' => [
+                    'id',
+                    'recipient',
+                    'carrier',
+                    'service',
+                    'tracking_code',
+                    'status',
+                    'label_url',
+                    'label_pdf_url',
+                    'from_address',
+                    'to_address',
+                    'parcel',
+                    'rate',
+                    'print_url',
+                    'created_at',
+                    'updated_at',
+                ],
+            ]);
+    }
+
+    public function test_user_cannot_view_another_users_label_details(): void
+    {
+        $user = User::factory()->create();
+        $label = ShippingLabel::factory()->for(User::factory())->create();
+
+        $response = $this
+            ->withToken($user->createToken('api')->plainTextToken)
+            ->getJson("/api/labels/{$label->id}");
+
+        $response->assertNotFound();
+    }
+
     public function test_user_can_print_their_label_pdf(): void
     {
         $user = User::factory()->create();

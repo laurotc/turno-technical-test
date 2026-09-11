@@ -57,6 +57,13 @@ class ShippingLabelController extends Controller
             ->setStatusCode(201);
     }
 
+    public function show(Request $request, ShippingLabel $shippingLabel): ShippingLabelResource
+    {
+        abort_unless($shippingLabel->user_id === $request->user()->id, 404);
+
+        return ShippingLabelResource::make($shippingLabel);
+    }
+
     public function print(Request $request, ShippingLabel $shippingLabel): RedirectResponse
     {
         abort_unless($shippingLabel->user_id === $request->user()->id, 404);

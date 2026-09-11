@@ -13,5 +13,6 @@ Route::middleware('auth:sanctum')->group(function (): void {
 
     Route::get('/labels', [ShippingLabelController::class, 'index'])->name('api.labels.index');
     Route::post('/labels', [ShippingLabelController::class, 'store'])->name('api.labels.store');
+    Route::get('/labels/{shippingLabel}', [ShippingLabelController::class, 'show'])->name('api.labels.show');
     Route::get('/labels/{shippingLabel}/print', [ShippingLabelController::class, 'print'])->name('api.labels.print');
 });

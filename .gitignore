@@ -4,6 +4,7 @@
 /public/build
 /storage/*.key
 /vendor
+/storage/framework
 .DS_Store
 .env
 .env.backup

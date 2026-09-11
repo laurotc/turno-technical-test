@@ -26,8 +26,14 @@ class ShippingLabelResource extends JsonResource
             'status' => $this->status,
             'label_url' => $this->label_url,
             'label_pdf_url' => $this->label_pdf_url,
+            'from_address' => $this->from_address,
+            'to_address' => $this->to_address,
+            'parcel' => $this->parcel,
+            'rate' => $this->rate,
+            'error_message' => $this->error_message,
             'print_url' => route('api.labels.print', $this->resource, absolute: false),
             'created_at' => $this->created_at?->toISOString(),
+            'updated_at' => $this->updated_at?->toISOString(),
         ];
     }
 }
