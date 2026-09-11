@@ -57,16 +57,14 @@ The label API lists the authenticated user's labels, shows label details, create
 
 ## Frontend status
 
-The React/Vite app is served by Laravel as a single-page app. Login and registration pages are wired to the backend API; label history, label creation, and label detail pages are still placeholders.
+The React/Vite app is served by Laravel as a single-page app. Login, registration, label history, and label detail pages are wired to the backend API; label creation is still a placeholder.
 
 Run the frontend dev server and Laravel server in separate terminals:
 
 ```bash
-npm run dev
 php artisan serve
+npm run dev
 ```
-
-If the browser shows a Vite React preamble error after frontend changes, stop and restart `npm run dev`.
 
 ## Database structure
 
@@ -89,7 +87,7 @@ php artisan test --testsuite=Feature
 
 Backend coverage includes register, login, invalid credentials, authenticated profile lookup, missing-token rejection, and logout token deletion.
 
-Shipping-label tests cover authenticated pagination, label details, user scoping, request validation, successful label storage with a fake EasyPost client, EasyPost error handling, and print redirects.
+Shipping-label backend tests cover authenticated pagination, label details, user scoping, request validation, successful label storage with a fake EasyPost client, EasyPost error handling, and print redirects.
 
 ## Assumptions
 
@@ -103,7 +101,7 @@ Shipping-label tests cover authenticated pagination, label details, user scoping
 
 ## What I'd do next
 
-- Add frontend React screens for login, label creation, label history, and label details.
+- Add the frontend React screen for label creation.
 - Add optional rate selection if users need to compare service levels before buying.
 - Add address verification, refunds/voiding, tracking webhooks, and better production observability.
 

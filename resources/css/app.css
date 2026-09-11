@@ -167,6 +167,12 @@ p {
     margin-bottom: 18px;
 }
 
+.section-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .eyebrow {
     color: #64748b;
     font-size: 12px;
@@ -202,6 +208,17 @@ p {
     border-color: #0f766e;
     background: #0f766e;
     color: #ffffff;
+}
+
+.button:hover,
+.icon-button:hover {
+    text-decoration: none;
+    border-color: #94a3b8;
+}
+
+.button.primary:hover {
+    border-color: #115e59;
+    background: #115e59;
 }
 
 .icon-button {
@@ -296,6 +313,94 @@ tr:last-child td {
     border-bottom: 0;
 }
 
+.table-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 26px;
+    border-radius: 999px;
+    padding: 0 10px;
+    background: #ecfdf5;
+    color: #047857;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.pagination-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.empty-state {
+    display: grid;
+    justify-items: start;
+    gap: 12px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 24px;
+    background: #f8fafc;
+}
+
+.empty-state h3 {
+    color: #111827;
+    font-size: 18px;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.detail-group {
+    border: 1px solid #d7dde3;
+    border-radius: 8px;
+    padding: 18px;
+    background: #ffffff;
+}
+
+.detail-group h3 {
+    margin-bottom: 12px;
+    color: #111827;
+    font-size: 16px;
+}
+
+.detail-rows {
+    display: grid;
+    gap: 10px;
+}
+
+.detail-row {
+    display: grid;
+    gap: 3px;
+}
+
+.detail-row dt,
+.detail-row dd {
+    margin: 0;
+}
+
+.detail-row dt {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.detail-row dd {
+    color: #1f2937;
+    line-height: 1.45;
+}
+
 .alert {
     border: 1px solid #f4a7a7;
     border-radius: 6px;
@@ -331,6 +436,22 @@ tr:last-child td {
     }
 
     .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-header,
+    .section-actions,
+    .pagination-bar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .section-actions .button,
+    .pagination-bar .button {
+        width: 100%;
+    }
+
+    .detail-grid {
         grid-template-columns: 1fr;
     }
 }
