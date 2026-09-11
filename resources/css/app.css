@@ -237,6 +237,24 @@ p {
     gap: 16px;
 }
 
+.form-section {
+    display: grid;
+    gap: 16px;
+    border: 1px solid #d7dde3;
+    border-radius: 8px;
+    padding: 18px;
+    background: #fbfcfd;
+}
+
+.form-section h3 {
+    color: #111827;
+    font-size: 16px;
+}
+
+.form-alert {
+    margin-bottom: 16px;
+}
+
 .field {
     display: grid;
     gap: 6px;
@@ -265,6 +283,52 @@ p {
 .field textarea:focus {
     border-color: #0f766e;
     outline: 3px solid rgb(15 118 110 / 0.16);
+}
+
+.field input:disabled {
+    background: #eef2f6;
+    color: #64748b;
+    cursor: not-allowed;
+}
+
+.input-with-suffix {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background: #ffffff;
+}
+
+.input-with-suffix:focus-within {
+    border-color: #0f766e;
+    outline: 3px solid rgb(15 118 110 / 0.16);
+}
+
+.input-with-suffix input {
+    border: 0;
+    border-radius: 0;
+}
+
+.input-with-suffix input:focus {
+    outline: 0;
+}
+
+.input-with-suffix span {
+    min-width: 42px;
+    padding: 0 10px;
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
 }
 
 .field-error {
@@ -437,6 +501,11 @@ tr:last-child td {
 
     .form-grid {
         grid-template-columns: 1fr;
+    }
+
+    .form-footer {
+        align-items: stretch;
+        flex-direction: column;
     }
 
     .section-header,

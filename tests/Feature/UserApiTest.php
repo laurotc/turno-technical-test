@@ -116,6 +116,13 @@ class UserApiTest extends TestCase
             ->assertJsonPath('message', 'Unauthenticated.');
     }
 
+    public function test_browser_auth_redirect_uses_spa_login_route(): void
+    {
+        $response = $this->get('/api/user');
+
+        $response->assertRedirect('/login');
+    }
+
     public function test_user_can_logout_current_token(): void
     {
         $user = User::factory()->create();

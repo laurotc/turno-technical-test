@@ -91,7 +91,7 @@ class ShippingLabelApiTest extends TestCase
             ->assertJsonValidationErrors(['parcel.weight']);
     }
 
-    public function test_create_shipping_label_returns_clean_error_when_no_usps_rate_exists(): void
+    public function test_create_shipping_label_returns_clean_error_when_no_rate_exists(): void
     {
         $user = User::factory()->create();
         $fakePurchaser = new FakeShippingLabelPurchaser();

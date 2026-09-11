@@ -53,11 +53,13 @@ Shipping-label creation uses EasyPost from the Laravel backend only. Add a test 
 EASYPOST_API_KEY=EZTK...
 ```
 
-The label API lists the authenticated user's labels, shows label details, creates a new USPS test label by buying the cheapest USPS rate, and redirects to the stored PDF label URL for printing.
+The label API lists the authenticated user's labels, shows label details, creates a USPS test label by buying the first USPS rate returned by EasyPost, then redirects to the stored PDF label URL for printing. EasyPost test billing is controlled by using a test API key.
+
+The React table and detail pages show the print action only when EasyPost returns a stored `label_pdf_url` or `label_url`. The protected API print route remains available at `/api/labels/{id}/print`; browser requests without a bearer token redirect to the SPA login route instead of throwing a Laravel route exception.
 
 ## Frontend status
 
-The React/Vite app is served by Laravel as a single-page app. Login, registration, label history, and label detail pages are wired to the backend API; label creation is still a placeholder.
+The React/Vite app is served by Laravel as a single-page app. Login, registration, label history, label detail, and label creation pages are wired to the backend API.
 
 Run the frontend dev server and Laravel server in separate terminals:
 
@@ -82,12 +84,14 @@ The MVP treats an EasyPost shipment and its purchased label as one user-facing `
 Run the backend feature tests:
 
 ```bash
-php artisan test --testsuite=Feature
+php artisan test
 ```
 
 Backend coverage includes register, login, invalid credentials, authenticated profile lookup, missing-token rejection, and logout token deletion.
 
-Shipping-label backend tests cover authenticated pagination, label details, user scoping, request validation, successful label storage with a fake EasyPost client, EasyPost error handling, and print redirects.
+Shipping-label backend tests cover authenticated pagination, label details, user scoping, request validation, successful label storage with a fake EasyPost client, EasyPost error handling, print redirects, and USPS rate selection.
+
+When EasyPost returns no rates, the API includes carrier messages from EasyPost in the error response to make address or carrier-account issues easier to diagnose.
 
 ## Assumptions
 
@@ -97,14 +101,14 @@ Shipping-label backend tests cover authenticated pagination, label details, user
 - API authentication uses Laravel Sanctum in bearer-token mode, not SPA cookie mode.
 - EasyPost labels should be created with a test API key so postage is not charged.
 - Shipping labels are stored as one local record per purchased EasyPost shipment label.
-- The MVP automatically buys the cheapest USPS rate instead of asking users to choose a rate.
+- The MVP buys the first USPS rate returned by EasyPost instead of asking users to choose one.
 
 ## What I'd do next
 
-- Add the frontend React screen for label creation.
 - Add optional rate selection if users need to compare service levels before buying.
 - Add address verification, refunds/voiding, tracking webhooks, and better production observability.
 
 ## Notes
 
-- Frontend pages and EasyPost integration have not been added yet.
+- EasyPost integration requires `EASYPOST_API_KEY` to be set before creating real test labels.
+- EasyPost API Key used during development was a test environment key
