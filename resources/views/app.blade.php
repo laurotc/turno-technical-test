@@ -7,6 +7,7 @@
 
         <title>{{ config('app.name', 'Turno Technical Test') }}</title>
 
+        @viteReactRefresh
         @vite(['resources/css/app.css', 'resources/js/app.jsx'])
     </head>
     <body>

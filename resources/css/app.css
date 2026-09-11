@@ -145,6 +145,16 @@ p {
     margin: 14px 0;
 }
 
+.auth-panel .alert {
+    margin-bottom: 16px;
+}
+
+.auth-switch {
+    margin-top: 18px;
+    color: #64748b;
+    font-size: 14px;
+}
+
 .page-section {
     padding: 24px;
 }
@@ -205,6 +215,11 @@ p {
     gap: 16px;
 }
 
+.form-stack {
+    display: grid;
+    gap: 16px;
+}
+
 .field {
     display: grid;
     gap: 6px;
@@ -233,6 +248,21 @@ p {
 .field textarea:focus {
     border-color: #0f766e;
     outline: 3px solid rgb(15 118 110 / 0.16);
+}
+
+.field-error {
+    color: #be123c;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.button:disabled {
+    cursor: not-allowed;
+    opacity: 0.64;
 }
 
 .table-wrap {

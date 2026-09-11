@@ -57,7 +57,7 @@ The label API lists the authenticated user's labels, shows label details, create
 
 ## Frontend status
 
-The React/Vite app shell is configured and served by Laravel as a single-page app. It currently includes placeholder routes for login, registration, label history, label creation, and label detail pages.
+The React/Vite app is served by Laravel as a single-page app. Login and registration pages are wired to the backend API; label history, label creation, and label detail pages are still placeholders.
 
 Run the frontend dev server and Laravel server in separate terminals:
 
@@ -65,6 +65,8 @@ Run the frontend dev server and Laravel server in separate terminals:
 npm run dev
 php artisan serve
 ```
+
+If the browser shows a Vite React preamble error after frontend changes, stop and restart `npm run dev`.
 
 ## Database structure
 
@@ -85,7 +87,7 @@ Run the backend feature tests:
 php artisan test --testsuite=Feature
 ```
 
-Current coverage includes register, login, invalid credentials, authenticated profile lookup, missing-token rejection, and logout token deletion.
+Backend coverage includes register, login, invalid credentials, authenticated profile lookup, missing-token rejection, and logout token deletion.
 
 Shipping-label tests cover authenticated pagination, label details, user scoping, request validation, successful label storage with a fake EasyPost client, EasyPost error handling, and print redirects.
 

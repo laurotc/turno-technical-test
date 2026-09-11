@@ -1,31 +1,18 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
-import { ProtectedRoute } from './auth/ProtectedRoute';
-import { AppLayout } from './layouts/AppLayout';
-import { CreateLabelPage } from './pages/CreateLabelPage';
-import { LabelDetailPage } from './pages/LabelDetailPage';
-import { LabelsPage } from './pages/LabelsPage';
-import { LoginPage } from './pages/LoginPage';
-import { RegisterPage } from './pages/RegisterPage';
+import '../css/app.css';
+import './bootstrap';
 
-export function App() {
-    return (
-        <Routes>
-            <Route path="/" element={<Navigate to="/labels" replace />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route
-                path="/labels"
-                element={
-                    <ProtectedRoute>
-                        <AppLayout />
-                    </ProtectedRoute>
-                }
-            >
-                <Route index element={<LabelsPage />} />
-                <Route path="create" element={<CreateLabelPage />} />
-                <Route path=":id" element={<LabelDetailPage />} />
-            </Route>
-            <Route path="*" element={<Navigate to="/labels" replace />} />
-        </Routes>
-    );
-}
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from './auth/AuthContext';
+import { RootApp } from './RootApp';
+
+createRoot(document.getElementById('root')).render(
+    <StrictMode>
+        <BrowserRouter>
+            <AuthProvider>
+                <RootApp />
+            </AuthProvider>
+        </BrowserRouter>
+    </StrictMode>,
+);
