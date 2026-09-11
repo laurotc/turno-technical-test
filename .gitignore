@@ -1,0 +1,15 @@
+/.phpunit.cache
+/bootstrap/cache/*.php
+/node_modules
+/public/build
+/storage/*.key
+/vendor
+.DS_Store
+.env
+.env.backup
+.env.lando
+.env.production
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log

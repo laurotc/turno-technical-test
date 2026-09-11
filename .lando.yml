@@ -1,0 +1,50 @@
+name: turno-technical-test
+
+recipe: laravel
+
+config:
+  php: "8.5"
+  composer_version: "2-latest"
+  database: mariadb:11.4
+  via: nginx
+  webroot: public
+  xdebug: false
+
+env_file:
+  - .env.lando
+
+excludes:
+  - vendor
+  - node_modules
+
+services:
+  node:
+    type: node:24
+    scanner: false
+    command: tail -f /dev/null
+    ports:
+      - 5173:5173
+
+tooling:
+  npm:
+    service: node
+    cmd: npm
+  node:
+    service: node
+    cmd: node
+  npx:
+    service: node
+    cmd: npx
+  mysql:
+    service: database
+    cmd: mysql -u laravel -p laravel laravel
+  dev:
+    service: node
+    cmd: npm run dev
+  build:
+    service: node
+    cmd: npm run build
+  test:
+    service: appserver
+    description: Run php unit tests
+    cmd: /app/vendor/bin/phpunit --stop-on-failure
