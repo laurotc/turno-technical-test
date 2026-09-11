@@ -43,9 +43,17 @@ The app will be available at `http://127.0.0.1:8000`.
 
 ## Backend status
 
-The backend currently includes a simple JSON user API for registration, login, authenticated user lookup, and logout.
+The backend currently includes JSON APIs for user authentication and shipping-label management.
 
 Authenticated API requests use Laravel Sanctum bearer tokens returned by login or registration.
+
+Shipping-label creation uses EasyPost from the Laravel backend only. Add a test key to `.env` before creating labels:
+
+```env
+EASYPOST_API_KEY=EZTK...
+```
+
+The label API lists the authenticated user's labels, creates a new USPS test label by buying the cheapest USPS rate, and redirects to the stored PDF label URL for printing.
 
 ## Database structure
 
@@ -68,6 +76,8 @@ php artisan test --testsuite=Feature
 
 Current coverage includes register, login, invalid credentials, authenticated profile lookup, missing-token rejection, and logout token deletion.
 
+Shipping-label tests cover authenticated pagination, user scoping, request validation, successful label storage with a fake EasyPost client, EasyPost error handling, and print redirects.
+
 ## Assumptions
 
 - This is a prototype focused on the core assignment flow rather than production polish.
@@ -76,14 +86,13 @@ Current coverage includes register, login, invalid credentials, authenticated pr
 - API authentication uses Laravel Sanctum in bearer-token mode, not SPA cookie mode.
 - EasyPost labels should be created with a test API key so postage is not charged.
 - Shipping labels are stored as one local record per purchased EasyPost shipment label.
+- The MVP automatically buys the cheapest USPS rate instead of asking users to choose a rate.
 
 ## What I'd do next
 
-- Add the EasyPost backend service for creating shipments, selecting a USPS test rate, buying the label, and storing the response.
-- Add authenticated shipping-label API endpoints for create, list, detail, and print URL access.
 - Add frontend React screens for login, label creation, label history, and printable label details.
-- Add validation for US-only addresses and package dimensions before calling EasyPost.
-- Add error handling tests for EasyPost failures and authorization tests for user-scoped label history.
+- Add optional rate selection if users need to compare service levels before buying.
+- Add address verification, refunds/voiding, tracking webhooks, and better production observability.
 
 ## Notes
 
